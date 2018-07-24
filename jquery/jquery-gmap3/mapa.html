@@ -1,0 +1,140 @@
+<html>
+<head>
+<title>Mapas com JQuery</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<script type="text/javascript" src="js/gmap3.js"></script>
+<style>
+body {
+	text-align: center;
+	font-family: Arial, sans-serif;
+}
+#balao {
+	width: 370px;
+	height: 110px;
+	padding: 5px;
+}
+#balao p {
+	margin: 0;
+	text-align: left;
+	float: left;
+}
+#balao img {
+	display: block;
+	float: left;
+	padding-right: 10px;
+}
+.gmap3 {
+	margin: 20px auto;
+	border: 1px dashed #C0C0C0;
+	width: 700px;
+	height: 500px;
+}
+</style>
+<script type="text/javascript">
+// inicializa jquery
+ $(function(){
+		
+		// conteudo das infowindows 
+		var conteudoCampoGrande = '<div id="balao">'+
+		 '<img src="imagens/logo.png" />'+
+  								'<p><strong>Senac Campo Grande</strong></p>'+
+    							'<p>Fone: (67) 3312-6260</p>'+
+								'<p><a href="http://www.ms.senac.br/cursos/catalogo.php?acao=unidade&u=5" target="_blank">Ver os cursos desta unidade</a></p>'+
+								'</div>';
+		     
+		var conteudoDourados = '<div id="balao">'+
+		 '<img src="imagens/logo.png" />'+
+  								'<p><strong>Senac Dourados</strong></p>'+
+    							'<p>Fone: (67) 3411-2400</p>'+
+								'<p><a href="http://www.ms.senac.br/cursos/catalogo.php?acao=unidade&u=7" target="_blank">Ver os cursos desta unidade</a></p>'+
+								'</div>';	 
+								
+		var conteudoCorumba = '<div id="balao">'+
+		 '<img src="imagens/logo.png" />'+
+  								'<p><strong>Senac Corumbá</strong></p>'+
+    							'<p>Fone: (67) 3234-2000</p>'+
+								'<p><a href="http://www.ms.senac.br/cursos/catalogo.php?acao=unidade&u=6" target="_blank">Ver os cursos desta unidade</a></p>'+
+								'</div>';
+									 
+		var conteudoTresLagoas = '<div id="balao">'+
+		 '<img src="imagens/logo.png" />'+
+  								'<p><strong>Senac Três Lagoas</strong></p>'+
+    							'<p>Fone: (67) 3509-5100</p>'+
+								'<p><a href="http://www.ms.senac.br/cursos/catalogo.php?acao=unidade&u=8" target="_blank">Ver os cursos desta unidade</a></p>'+
+								'</div>';	 						
+// inicializa plugin gmap3			 
+$("#mapa").gmap3({
+    map:
+	{
+      // local padrão onde o mapa irá aparecer quando carregado
+	  address:"Mato Grosso do Sul, Brasil",
+      options:
+	  {
+		// zoom inicial (aproximação)  
+        zoom:6,
+		// opções de controle do tipo do mapa (ruas, satélite, etc).
+		// mapTypeControl como FALSE não mostra opções
+        mapTypeControl: true,
+        mapTypeControlOptions: 
+		{
+          // define controles no formato dropdown
+		  style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+        },
+        // permite navegar com o botão scroll do mouse
+		scrollwheel: true,
+		// mostra bonequinho para habilitar modo streetview
+        streetViewControl: true
+      }
+	},
+	// marcadores
+	marker:{
+	// valores (localização dos marcadores)	
+    values:[
+	// pode ser uma latitude/longitude
+      {latLng:[-20.488773,-54.619217], data:conteudoCampoGrande, options:{icon:"imagens/marcador.png", shadow:"imagens/marcador_sombra.png"}},
+	// podem ser palavras-chave ou endereços
+	  {address:"Senac Corumbá", data:conteudoCorumba, options:{icon:"imagens/marcador.png", shadow:"imagens/marcador_sombra.png"}},
+	  {address:"Senac Dourados", data:conteudoDourados, options:{icon:"imagens/marcador.png", shadow:"imagens/marcador_sombra.png"}},
+      {address:"Senac Três Lagoas", data:conteudoTresLagoas, options:{icon:"imagens/marcador.png", shadow:"imagens/marcador_sombra.png"}}
+    ],
+	// evita reposicionar marcadores
+    options:{
+      draggable: false
+    },
+	// listener de eventos
+    events:{
+	  // evento de clique		
+      click: function(marker, event, context)
+	  {
+        // cria a infowindow
+		var map = $(this).gmap3("get"),
+          infowindow = $(this).gmap3({get:{name:"infowindow"}});
+       
+	   // 
+	    if (infowindow)
+		{
+          infowindow.open(map, marker);
+          infowindow.setContent(context.data);
+        } else {
+          $(this).gmap3({
+            infowindow:
+			{
+              anchor:marker,
+              options:{content: context.data}
+            }
+          });
+        }
+      }
+    }
+  }
+  }); 
+});     
+</script>
+</head>
+<body>
+<h1>Mapa com JQuery </h1>
+<div id="mapa" class="gmap3"></div>
+</body>
+</html>

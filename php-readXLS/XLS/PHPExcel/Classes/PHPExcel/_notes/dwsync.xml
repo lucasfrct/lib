@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="Autoloader.php" server="C:/SERVER/wamp/www/skins/" local="130670518522370000" remote="130670518520000000" Dst="1" />
+<file name="CachedObjectStorageFactory.php" server="C:/SERVER/wamp/www/skins/" local="130670518526580000" remote="130670518520000000" Dst="1" />
+<file name="Calculation.php" server="C:/SERVER/wamp/www/skins/" local="130670518541040000" remote="130670518540000000" Dst="1" />
+<file name="Cell.php" server="C:/SERVER/wamp/www/skins/" local="130670518546230000" remote="130670518540000000" Dst="1" />
+<file name="Chart.php" server="C:/SERVER/wamp/www/skins/" local="130670518550550000" remote="130670518550000000" Dst="1" />
+<file name="Comment.php" server="C:/SERVER/wamp/www/skins/" local="130670518554890000" remote="130670518550000000" Dst="1" />
+<file name="DocumentProperties.php" server="C:/SERVER/wamp/www/skins/" local="130670518560210000" remote="130670518560000000" Dst="1" />
+<file name="DocumentSecurity.php" server="C:/SERVER/wamp/www/skins/" local="130670518564190000" remote="130670518560000000" Dst="1" />
+<file name="Exception.php" server="C:/SERVER/wamp/www/skins/" local="130670518568050000" remote="130670518560000000" Dst="1" />
+<file name="HashTable.php" server="C:/SERVER/wamp/www/skins/" local="130670518572270000" remote="130670518570000000" Dst="1" />
+<file name="IComparable.php" server="C:/SERVER/wamp/www/skins/" local="130670518575960000" remote="130670518570000000" Dst="1" />
+<file name="IOFactory.php" server="C:/SERVER/wamp/www/skins/" local="130671418039770000" remote="130671418030000000" Dst="1" />
+<file name="NamedRange.php" server="C:/SERVER/wamp/www/skins/" local="130670518584180000" remote="130670518580000000" Dst="1" />
+<file name="ReferenceHelper.php" server="C:/SERVER/wamp/www/skins/" local="130670518590470000" remote="130670518590000000" Dst="1" />
+<file name="RichText.php" server="C:/SERVER/wamp/www/skins/" local="130670518594500000" remote="130670518590000000" Dst="1" />
+<file name="Settings.php" server="C:/SERVER/wamp/www/skins/" local="130670518598970000" remote="130670518590000000" Dst="1" />
+<file name="Style.php" server="C:/SERVER/wamp/www/skins/" local="130670518603960000" remote="130670518600000000" Dst="1" />
+<file name="Worksheet.php" server="C:/SERVER/wamp/www/skins/" local="130670518617040000" remote="130670518610000000" Dst="1" />
+<file name="WorksheetIterator.php" server="C:/SERVER/wamp/www/skins/" local="130670518621050000" remote="130670518620000000" Dst="1" />
+</dwsync>

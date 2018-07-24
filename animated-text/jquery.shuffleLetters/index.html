@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Shuffle Text Effect with jQuery | Tutorialzine Demo</title>
+        
+        <!-- Our CSS stylesheet file -->
+        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" type="text/css" />
+        
+        <!--[if lt IE 9]>
+          <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    
+    <body>
+		
+		<div id="container">This is a Tutorialzine Demo!</div>
+
+		<input type="text" id="userText" />
+
+        <footer>
+	        <h2>Shuffle Text Effect with jQuery</h2>
+            <a class="tzine" href="http://tutorialzine.com/2011/09/shuffle-letters-effect-jquery/">Read &amp; Download on</a>
+        </footer>
+        
+        <!-- JavaScript includes -->
+		<script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
+		<script src="js/jquery.shuffleLetters.min.js"></script>
+        <script>
+
+        $('#element').shuffleLetters({ "text": "teste", });
+
+            $(function(){
+    
+                // container is the DOM element;
+                // userText is the textbox
+                
+                var container = $("#container")
+                var userText = $('#userText'); 
+                
+                // Shuffle the contents of container
+                container.shuffleLetters();
+
+                // Bind events
+                userText.click(function () {
+                    
+                  userText.val("");
+                  
+                }).bind('keypress',function(e){
+                    
+                    if(e.keyCode == 13){
+                        
+                        // The return key was pressed
+                        container.shuffleLetters({
+                            "text": userText.val()
+                        });
+                        
+                        userText.val("");
+                    }
+
+                }).hide();
+
+                // Leave a 4 second pause
+
+                setTimeout(function(){
+                    
+                    // Shuffle the container with custom text
+                    container.shuffleLetters({
+                        "text": "Test it for yourself!"
+                    });
+                    
+                    userText.val("type anything and hit return..").fadeIn();
+                    
+                },4000);
+                
+});
+        </script>
+           
+    </body>
+</html>
+
