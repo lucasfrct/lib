@@ -1,21 +1,27 @@
 <?php
-
+/*
+ * Autor: Lucas Costa
+ * Data: Abril de 2020
+ * Observador PHP em Server-Sent para eventos javascript 
+ * 
+ * CODE JS
+ *      var source = new EventSource('obseerver.event.php');
+ * 
+ */
 header('Content-Type: text/event-stream');
 header('Cache-Control: no-cache');
 
 session_start();
 
-require_once ( "../archive/Archive.php" );
-
 class Observer 
 {
-    public static function EventCreate ( string $name, string $data, $retry = 1000 ) {
+    public static function Event ( string $name = "", string $data = "", $retry = "1000" ) {
         echo "event: {$name}\n";
-        echo "retry: {$retry}\n";
         echo "data: {$data}\n\n";
+        echo "retry: {$retry}\n";
     }
 
-    public static function EventCount ( string $name, $count = "" ) {
+    public static function Counter ( string $name, $count = "" ) {
 
         if ( $count !== "" && $count == 0) {
             $_SESSION [ $name ] = 0;
@@ -27,17 +33,4 @@ class Observer
 
         return $_SESSION [ $name ]; 
     }
-
-    public static function LogCreate ( $name, $data ) {
-        return Archive::write ( "../log/{$name}.log", $data );
-    }
-
-    public static function LogRead( $name ) {
-        return Archive::read ( "../log/{$name}.log" );
-    }
-
-    public static function LogEqual ( string $cache, string $cached ) {
-        return ( strcmp ( $cache, $cached ) == 0 );
-    }
-
 }

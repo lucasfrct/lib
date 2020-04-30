@@ -46,6 +46,13 @@ body {
 }
 </style>';
 
+
+/*
+ * Autor: Lucas Costa
+ * Data: Abril de 2020
+ * Classe para testes unitártios simples
+ */
+
 class Tester 
 {
     private static $offset = 0.000007;
@@ -76,7 +83,7 @@ class Tester
         return "Tester";
     }
 
-    public static function ok ( bool $status = false, string $msg = null ): bool
+    public static function ok ( bool $status = false, string $msg = "" ): bool
     {
         self::$msg = $msg;
         return self::$status = $status;
@@ -96,18 +103,18 @@ class Tester
         </div>';
     }
 
-    private static function sum ( array $array = null ): float
+    private static function sum ( array $array = [ ] ): float
     {
         return array_reduce ( $array, function ( $previous, $item ) {
             return $previous += $item;
         } );
     }
 
-    public static function on ( string $name = null, Closure $fn = null, int $repeat = 1 ) 
+    public static function on ( string $name = "", Closure $fn = null, int $repeat = 1 ) 
     {
         self::reset ( );
 
-        if ( is_string ( $name ) && $fn instanceof Closure && is_numeric ( self::$repeat ) ) {
+        if ( !empty ( $name ) && $fn instanceof Closure && is_numeric ( self::$repeat ) ) {
 
             self::$name = $name;
             self::$repeat = $repeat;
@@ -116,8 +123,11 @@ class Tester
             $init = microtime ( 1 );
             
             for ( $i = 0; $i < self::$repeat; $i++ ) {
+                
                 $time = microtime ( 1 );
+                
                 $fn ( self::assert ( ) );
+                
                 array_push ( $timeOfFunctions, ( ( microtime ( 1 ) - $time ) * 1000 ) );
             };
 

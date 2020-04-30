@@ -43,6 +43,7 @@ Class Archive
 		unlink ( $src );
 	}
 
+	# Método para filtar conteudo entre duas ocorrencias
 	public static function FilterBetween ( string $src, string $targetInit, string $targetEnd )
 	{
 		$out = "";
@@ -66,6 +67,7 @@ Class Archive
 
 	}
 	
+	# Método para filtar conteúdo fora das ocorrencias selecionadas
 	public static function filterOutside ( string $src, string $targetInit, string $targetEnd )
 	{
 		$out = "";
@@ -88,4 +90,36 @@ Class Archive
 
 		return $out;
 	}
+
+	# Método para juntar conteúdo de arquivos
+	public static function join ( array $list = [ ] ): string 
+	{	
+		$compile = "";
+
+		foreach ( $list as $index => $filename ) {
+			$compile .= self::read ( $filename )."\r\n";
+		};
+
+		return $compile;
+	}
+
+	# Método para minificar os arquivos (retida espaços e quebras de linhas) 
+	public static function minify ( $content = "" ): string
+	{
+		$compile = "";
+		preg_match_all ( '/(\/\*)(.|\s)+?(\*\/)/', $content, $matches );
+
+		foreach ( $matches [ 0 ] as $bloco ) {
+			$compile = str_replace ( $bloco, '', $compile );
+		};
+
+		$compile = str_replace ( ' ',    '', $compile );
+		$compile = str_replace ( "\r\n", '', $compile );
+		$compile = str_replace ( "\r",   '', $compile );
+		$compile = str_replace ( "\n",   '', $compile );
+		$compile = str_replace ( ' ',    '', $compile );
+
+		return $compile;
+	}
+
 }

@@ -1,27 +1,29 @@
 <?php 
 #Path.php
 /*
-* Autor: Lucas Costa
-* Data: Abril 2020
-*/
+ * Autor: Lucas Costa
+ * Data: Abril 2020
+ */
 
 Class Path
 {	
+	# Normaliza o separador de diretório conforme o sistema operacional
 	# @param $path : string
 	# @return : string (type directory)
-	public function digest ( string $path = "" ): string 
+	public static function digest ( string $path = "" ): string 
 	{
 		$path = str_replace ( array ( '/', '\\' ), DIRECTORY_SEPARATOR, $path );
 		return realpath ( $path );
 	}
 
-	# lista arquivos em diretório
-	public function list ( $diretory ) 
+	# lista arquivos somente no diretório corrente
+	# @param : straing (type directory)
+	public static function list ( string $path ): array 
 	{
 		$files = [];
-		$dir = dir ( $diretory );
+		$directory = dir ( self::digest ( $path ) );
 
-		while ( $file = $dir->read()) {
+		while ( $file = $directory->read ( ) ) {
 			if ($file !== "." && $file !== "..") {
 				array_push ( $files, $file );
 			}
@@ -30,13 +32,14 @@ Class Path
 		return $files;
 	}
 
-	public function check ( string $directory = "" ) {
-		return ( realpath ( $directory ) && is_dir ( $directory ) ) ? true : false;
+	# verifica se o diretório existe
+	public static function check ( string $directory = "" ): boolean
+	{
+		return ( is_dir ( self::digest ( $directory ) ) ) ? true : false;
 	}
 }
 
-#$path = new Path ( );
-#$out = $path->digest ( "d:/lc/" );
-#$out = $path->check ( "d:/lc/" );
-#$out = $path->list ( "d:/lc/" );
+#$out = Path::digest ( "d:/lc/" );
+#$out = Path::check ( "d:/lc/" );
+#$out = Path::list ( "d:/lc/" );
 #var_dump ( $out );

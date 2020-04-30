@@ -153,13 +153,7 @@ var $Date = { };
 	function __returnTreeCharacters ( $str = "" ) {
 		return $str.substring ( 0, 3 );
 	};
-
-	function __mapArrayTreeCharacters ( $array = [ ] ) {
-		return $array.map ( function ( $item ) {
-			return __returnTreeCharacters ( $item );
-		} );
-	};
-
+	
 	function __daysOfMonth ( $numberMonth = 1, $numberYear = 1970 ) {
 		var $days = new Date ( Number ( $numberYear ), Number ( $numberMonth ), 0 );
 		return $days.getDate ( );
