@@ -17,8 +17,8 @@ class Observer
 {
     public static function Event ( string $name = "", string $data = "", $retry = "1000" ) {
         echo "event: {$name}\n";
-        echo "data: {$data}\n\n";
         echo "retry: {$retry}\n";
+        echo "data: {$data}\n\n";
     }
 
     public static function Counter ( string $name, $count = "" ) {

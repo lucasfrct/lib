@@ -13,24 +13,43 @@ Class Path
 	public static function digest ( string $path = "" ): string 
 	{
 		$path = str_replace ( array ( '/', '\\' ), DIRECTORY_SEPARATOR, $path );
-		return realpath ( $path );
+		return $path;
 	}
 
 	# lista arquivos somente no diretório corrente
-	# @param : straing (type directory)
-	public static function list ( string $path ): array 
+	# @param : string (type directory) - Exemplo: "*.{avi,mov,wmv,mp4,flv,mkv,rm}" (somente videos)
+	# @return: array 
+	public static function list ( string $path, string $flag = "*" ): array 
 	{
 		$files = [];
-		$directory = dir ( self::digest ( $path ) );
 
-		while ( $file = $directory->read ( ) ) {
-			if ($file !== "." && $file !== "..") {
-				array_push ( $files, $file );
-			}
+		$directory = glob( self::digest ( $path ).$flag, GLOB_BRACE );
+
+		foreach ( $directory as $file ) {
+			array_push ( $files, $file );
 		};
 
 		return $files;
 	}
+
+	# Scaneia diretórios
+	public static function access ( string $path = "C:/", string $flag = "" ): array
+	{ 
+		$paths = array ( "directories"=> [], "videos"=> [] );
+
+		$temp = glob( self::digest($path)."*" );
+		$temp = array_filter ( $temp, function ( $dir ) {
+			if ( is_dir ( $dir )) {
+				return $dir;
+			};
+		} );
+
+		$paths [ "directories" ] = $temp;
+		$paths [ "videos" ] = glob( self::digest($path).$flag, GLOB_BRACE );
+
+		return $paths;
+
+	} 
 
 	# verifica se o diretório existe
 	public static function check ( string $directory = "" ): boolean
